@@ -3,11 +3,24 @@ import { useCallback, useState } from "react"
 import { InputCustome } from "../InputCustome/InputCustome"
 import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import ButtonStyle from "../ButtonStyle/ButtonStyle"
+import { Api } from "../../utils/callApi"
+import { useCharacterStore } from '../../store/useCharacterStore'
 export function Form(){
     const [characterName, setCharacterName] = useState("")
+    const {setCharacters} = useCharacterStore()
     const handleNameChange = useCallback((e)=>{
         setCharacterName(e.target.value)
     },[])
+
+    const searchCharacters = useCallback(()=>{
+        Api.getCharacters(characterName)
+        .then((res)=>{
+            setCharacters(res)
+        })
+        .catch((error)=>{
+            window.alert(error)
+        })
+    },[characterName])
 
     return(       
     <form className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
@@ -28,7 +41,8 @@ export function Form(){
                         leftIcon={<SearchIcon/>}
                         label="Search"
                         variant="solid"
-                        onClick={()=>{console.log("hi")}}
+                        isDisabled={characterName === ""}
+                        onClick={searchCharacters}  
                     />
                 </div>
                 <div className=" block mt-4 lg:inline-block lg:mt-0">
