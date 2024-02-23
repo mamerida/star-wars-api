@@ -12,7 +12,7 @@ export function Form(){
         setCharacterName(e.target.value)
     },[])
 
-    const searchCharacters = useCallback(()=>{
+    const searchCharacters = useCallback(async()=>{
         Api.getCharacters(characterName)
         .then((res)=>{
             setCharacters(res)
