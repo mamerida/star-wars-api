@@ -3,11 +3,11 @@ const BASEURL = "https://swapi.dev/api/people/?search="
 const METHOD_GATE = "GET"
 
 
-const callApi = async(url, method) =>{
+const callApi = async (url, method) =>{
     return fetch(url,{method: method})
-    .then(res =>{
-        if(res.status !== 200){
-            throw new Error()
+    .then(res => {
+        if(!res.ok){
+            throw new Error();
         }else{
             return res.json();
         }
