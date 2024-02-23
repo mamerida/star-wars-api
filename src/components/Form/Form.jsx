@@ -1,7 +1,8 @@
 'use client'
 import { useCallback, useState } from "react"
 import { InputCustome } from "../InputCustome/InputCustome"
-import { Search2Icon } from '@chakra-ui/icons'
+import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
+import ButtonStyle from "../ButtonStyle/ButtonStyle"
 export function Form(){
     const [characterName, setCharacterName] = useState("")
     const handleNameChange = useCallback((e)=>{
@@ -9,9 +10,9 @@ export function Form(){
     },[])
 
     return(       
-    <form className="block flex-grow lg:flex lg:items-center">
-        <div className="text-sm lg:flex-grow">
-            <div className="text-white lg:w-6/12 md:w-8/12 w-full">
+    <form className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div className="text-sm lg:flex-grow-0 flex flex-row flex-wrap justify-center">
+            <div className="text-white block mt-4  lg:w-30 lg:inline-block lg:mt-0">
                 <InputCustome 
                     value={characterName} 
                     onChange={handleNameChange} 
@@ -19,6 +20,25 @@ export function Form(){
                     leftElement={<Search2Icon />}
                     variant="flushed"
                 />
+            </div>
+            <div className="lg:ms-10 flex flex-row">
+                <div className="block mt-4 lg:inline-block lg:mt-0">
+                    <ButtonStyle 
+                        color="yellow" 
+                        leftIcon={<SearchIcon/>}
+                        label="Search"
+                        variant="solid"
+                        onClick={()=>{console.log("hi")}}
+                    />
+                </div>
+                <div className=" block mt-4 lg:inline-block lg:mt-0">
+                    <ButtonStyle 
+                        color="blackAlpha" 
+                        rightIcon={<RepeatClockIcon/>}
+                        label="Clear filters"
+                        onClick={()=>{console.log("hi")}}
+                    />
+                </div>
             </div>
         </div>
     </form>
