@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Logo from '../../../public/starwars.svg'
+import { Form } from '../Form/Form'
 
 export default function Header() {
   return (
@@ -9,6 +10,7 @@ export default function Header() {
             <Image src={Logo} alt="logo" width={130} height={"auto"} priority={true} />
             <h1 className="font-bold text-xl ml-6">Star Wars Wiki</h1>
         </div>
+        <Form/>
     </nav>
   )
 }
