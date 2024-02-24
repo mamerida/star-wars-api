@@ -20,7 +20,7 @@ export default function CharacterCard({name, gender, mass, eye_color, skin_color
                     alt="error"
                     priority={false}
                 />
-                <Heading size='lg' >{name}</Heading>
+                <Heading size='lg'>{name}</Heading>
             </Stack>
             <Stack mt='6' spacing='3' direction='row' className='flex justify-between'>
                 <Text className='capitalize' ><strong>Gender: </strong>{gender}</Text>
