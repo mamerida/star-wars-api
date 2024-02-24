@@ -17,11 +17,13 @@ const callApi = async (url, method) =>{
 
 const getCharacters = (name) => {
     const url = BASEURL + name
-
     return callApi(url, METHOD_GATE)
 }
 
+const getPage = (url) => callApi(url, METHOD_GATE)
+
 
 export const Api = {
-    getCharacters
+    getCharacters,
+    getPage
 }
