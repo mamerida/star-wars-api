@@ -1,4 +1,4 @@
-import { Card, CardBody, Divider, Heading, Stack, Text } from '@chakra-ui/react'
+import { Card, CardBody, Heading, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import Image from 'next/image';
 
@@ -18,8 +18,9 @@ export default function CharacterCard({name, gender, mass, eye_color, skin_color
                     className='rounded-lg shadow-lg shadow-yellow-500/50'
                     src={getCharactersNumber(url)}
                     alt="error"
+                    priority={false}
                 />
-                <Heading size='xl' >{name}</Heading>
+                <Heading size='lg' >{name}</Heading>
             </Stack>
             <Stack mt='6' spacing='3' direction='row' className='flex justify-between'>
                 <Text className='capitalize' ><strong>Gender: </strong>{gender}</Text>

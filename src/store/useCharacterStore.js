@@ -11,13 +11,19 @@ export const useCharacterStore = create(
       characters:[] ,
       setCharacters: (newState) => set({ 
         characters: newState.results, 
-        prev: newState.prev,
+        previous: newState.previous,
         next:newState.next,
         count:newState.count
       }),
+      clearStore: () => set({ 
+        characters:[] , 
+        previous: null,
+        next: null,
+        count: 0
+      }),
     }),
     {
-      name: 'food-storage',
+      name: 'characters-storage',
     },
   ),
 )

@@ -14,7 +14,7 @@ import { Button } from '@chakra-ui/react'
 export default function ButtonStyle({ color="yellow", leftIcon, rightIcon, label, variant="solid", onClick, ...props}) {
   const handleOnClick = (e) => {
     e.preventDefault();
-    onClick();
+    onClick(e);
   }
   return (
     <Button 

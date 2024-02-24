@@ -5,9 +5,9 @@ import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import ButtonStyle from "../ButtonStyle/ButtonStyle"
 import { Api } from "../../utils/callApi"
 import { useCharacterStore } from '../../store/useCharacterStore'
-export function Form(){
+export function HeaderForm(){
     const [characterName, setCharacterName] = useState("")
-    const {setCharacters} = useCharacterStore()
+    const {setCharacters, clearStore} = useCharacterStore()
     const handleNameChange = useCallback((e)=>{
         setCharacterName(e.target.value)
     },[])
@@ -50,7 +50,10 @@ export function Form(){
                         color="blackAlpha" 
                         rightIcon={<RepeatClockIcon/>}
                         label="Clear filters"
-                        onClick={()=>{console.log("hi")}}
+                        onClick={()=>{
+                            clearStore();
+                            setCharacterName("");
+                        }}
                     />
                 </div>
             </div>
