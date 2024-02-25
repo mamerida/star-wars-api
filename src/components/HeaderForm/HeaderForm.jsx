@@ -5,6 +5,8 @@ import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import ButtonStyle from "../ButtonStyle/ButtonStyle"
 import { Api } from "../../utils/callApi"
 import { useCharacterStore } from '../../store/useCharacterStore'
+import { Spinner } from '@chakra-ui/react'
+
 export function HeaderForm(){
     const [characterName, setCharacterName] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -36,6 +38,7 @@ export function HeaderForm(){
                     onChange={handleNameChange} 
                     placeholder="Character Name"
                     leftElement={<Search2Icon />}
+                    onKeyDown={(e)=>{if(e.keyCode === 13)e.preventDefault()}}
                     variant="flushed"
                 />
             </div>
@@ -61,6 +64,7 @@ export function HeaderForm(){
                         }}
                     />
                 </div>
+                {isLoading && <Spinner color="white" />}
             </div>
         </div>
     </form>
