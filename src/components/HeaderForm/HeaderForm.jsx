@@ -30,9 +30,9 @@ export function HeaderForm(){
     },[characterName])
 
     return(       
-    <form className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow-0 flex flex-row flex-wrap justify-center">
-            <div className="text-white block mt-4  lg:w-30 lg:inline-block lg:mt-0">
+    <form className=" block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div className="text-sm flex flex-row flex-wrap justify-center md:justify-start">
+            <div className="text-white block mt-4 max-[550px]:w-full md:w-30 lg:inline-block lg:mt-0">
                 <InputCustome 
                     value={characterName} 
                     onChange={handleNameChange} 
@@ -42,8 +42,8 @@ export function HeaderForm(){
                     variant="flushed"
                 />
             </div>
-            <div className="lg:ms-10 flex flex-row">
-                <div className="block mt-4 lg:inline-block lg:mt-0">
+            <div className="lg:ms-10 flex flex-row max-[550px]:w-full justify-center md:justify-start">
+                <div className="block mt-4 ms-5 lg:inline-block lg:mt-0">
                     <ButtonStyle 
                         color="yellow" 
                         leftIcon={<SearchIcon/>}
@@ -64,7 +64,7 @@ export function HeaderForm(){
                         }}
                     />
                 </div>
-                {isLoading && <Spinner color="white" />}
+                {isLoading && <Spinner color="white" className="mt-4" />}
             </div>
         </div>
     </form>
