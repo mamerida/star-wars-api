@@ -7,18 +7,23 @@ import { Api } from "../../utils/callApi"
 import { useCharacterStore } from '../../store/useCharacterStore'
 export function HeaderForm(){
     const [characterName, setCharacterName] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
     const {setCharacters, clearStore} = useCharacterStore()
     const handleNameChange = useCallback((e)=>{
         setCharacterName(e.target.value)
     },[])
 
     const searchCharacters = useCallback(async()=>{
+        setIsLoading(true)
         Api.getCharacters(characterName)
         .then((res)=>{
             setCharacters(res)
         })
         .catch((error)=>{
             window.alert(error)
+        })
+        .finally(()=>{
+            setIsLoading(false)
         })
     },[characterName])
 
@@ -41,7 +46,7 @@ export function HeaderForm(){
                         leftIcon={<SearchIcon/>}
                         label="Search"
                         variant="solid"
-                        isDisabled={characterName === ""}
+                        isDisabled={characterName === "" || isLoading}
                         onClick={searchCharacters}  
                     />
                 </div>

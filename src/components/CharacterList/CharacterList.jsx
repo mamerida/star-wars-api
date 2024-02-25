@@ -7,6 +7,7 @@ import SelectCustome from '../SelectCustome/SelectCustome'
 import ButtonStyle from '../ButtonStyle/ButtonStyle'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Api } from '@/utils/callApi'
+import Loading from '../Loading/Loading'
 
 const SELECT_GENDER = [
     {value:"male", label:"Male"},
@@ -16,9 +17,10 @@ const SELECT_GENDER = [
 ]
 
 export default function CharacterList() {
-    const {characters, previous, next, setCharacters} = useCharacterStore()
     const [characterSeleted, setCharacterSeleted] = useState([])
     const [genderSelected, setGenderSelected] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const {characters, previous, next, setCharacters} = useCharacterStore()
 
     const filterCharacters = (characters,gender) =>{
         return  characters.filter((chr)=> chr.gender === gender)
@@ -29,10 +31,16 @@ export default function CharacterList() {
         setGenderSelected(e.target.value)
     },[characters])
 
-    const handlePagination = useCallback( async(url)=>{
-        const characters = await Api.getPage(url)
-        setCharacters(characters)
-    },[characters, genderSelected])
+    const handlePagination = useCallback( (url)=>{
+        setIsLoading(true);
+        Api.getPage(url).then((characters)=>{
+            setCharacters(characters)
+        }).catch((error)=>{
+            window.alert(error)
+        }).finally(()=>{
+            setIsLoading(false)
+        })
+    },[characters])
 
     useEffect(()=>{
         setCharacterSeleted(genderSelected? filterCharacters(characters,genderSelected) : characters)
@@ -63,23 +71,26 @@ export default function CharacterList() {
                     />
                 </div>
             </section>
-            <section className='flex flex-wrap justify-center'>
-                {characterSeleted.map((chr)=>{
-                    return (
-                        <div className='p-4 max-w-sm'>
-                            <CharacterCard 
-                                url={chr.url} 
-                                key={chr.name} 
-                                name={chr.name}
-                                mass={chr.mass}
-                                eye_color={chr.eye_color}
-                                skin_color={chr.skin_color} 
-                                gender={chr.gender}
-                            />
-                        </div>
-                    )
-                })}
-            </section>
+            {isLoading ?
+                    <Loading/>
+                :
+                    <section className='flex flex-wrap justify-center'>
+                        {characterSeleted.map((chr)=>{
+                            return (
+                                <div  key={chr.url}  className='p-4 max-w-sm'>
+                                    <CharacterCard 
+                                        url={chr.url} 
+                                        name={chr.name}
+                                        mass={chr.mass}
+                                        eye_color={chr.eye_color}
+                                        skin_color={chr.skin_color} 
+                                        gender={chr.gender}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </section>
+            }
         </>
     )
 }

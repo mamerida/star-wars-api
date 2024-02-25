@@ -3,8 +3,6 @@ import Image from "next/image";
 import BB8 from '../../public/bb8.png';
 import CharacterList from "../components/CharacterList/CharacterList";
 import { useCharacterStore } from "../store/useCharacterStore";
-import { Suspense } from "react";
-import Loading from "@/components/Loading/Loading";
 
 export default function Home() {
   const {characters} = useCharacterStore()
