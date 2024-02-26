@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useCharacterStore } from '@/store/useCharacterStore'
+import { useSwapiStore } from '@/store/useSwapiStore'
 import CharacterCard from '../CharacterCard/CharacterCard'
 import SelectCustome from '../SelectCustome/SelectCustome'
 import ButtonStyle from '../ButtonStyle/ButtonStyle'
@@ -20,31 +20,31 @@ export default function CharacterList() {
     const [characterSeleted, setCharacterSeleted] = useState([])
     const [genderSelected, setGenderSelected] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const {characters, previous, next, setCharacters} = useCharacterStore()
+    const {results, previous, next, setResults} = useSwapiStore()
 
     const filterCharacters = (characters,gender) =>{
         return  characters.filter((chr)=> chr.gender === gender)
     }
 
     const handleGender = useCallback((e)=>{
-        setCharacterSeleted(e.target.value ? filterCharacters(characters,e.target.value) : characters)
+        setCharacterSeleted(e.target.value ? filterCharacters(results,e.target.value) : results)
         setGenderSelected(e.target.value)
-    },[characters])
+    },[results])
 
     const handlePagination = useCallback( (url)=>{
         setIsLoading(true);
-        Api.getPage(url).then((characters)=>{
-            setCharacters(characters)
+        Api.getPage(url).then((result)=>{
+            setResults(result)
         }).catch((error)=>{
             window.alert(error)
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[characters])
+    },[results])
 
     useEffect(()=>{
-        setCharacterSeleted(genderSelected? filterCharacters(characters,genderSelected) : characters)
-    },[characters])
+        setCharacterSeleted(genderSelected? filterCharacters(results,genderSelected) : results)
+    },[results])
 
     return (
         <>

@@ -2,15 +2,15 @@
 import Image from "next/image";
 import BB8 from '../../public/bb8.png';
 import CharacterList from "../components/CharacterList/CharacterList";
-import { useCharacterStore } from "../store/useCharacterStore";
+import { useSwapiStore } from "../store/useSwapiStore";
 
 export default function Home() {
-  const {characters} = useCharacterStore()
+  const {results} = useSwapiStore()
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-900">
       <section className="flex flex-col items-center min-w-full ">
-        {characters.length !== 0 ? 
+        {results.length !== 0 ? 
           <>
             <CharacterList/>
           </>
