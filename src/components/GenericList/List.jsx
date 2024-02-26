@@ -10,59 +10,29 @@ import { Api } from '@/utils/callApi'
 import Loading from '../Loading/Loading'
 import { notFound } from 'next/navigation'
 
-const SELECT_GENDER = [
-    {value:"male", label:"Male"},
-    {value:"female",label:"Female"},
-    {value:"unknown",label:"Unknown"},
-    {value:"n/a", label: "N/A"}
-]
-const PEOPLE_OPTION = "people";
-
-export default function CharacterList() {
-    const [characterSeleted, setCharacterSeleted] = useState([])
-    const [genderSelected, setGenderSelected] = useState("");
+export default function List({optionSelected}) {
     const [isLoading, setIsLoading] = useState(false);
     const {results, type, previous, next, setResults} = useSwapiStore()
-
-    const filterCharacters = (characters,gender) =>{
-        return  characters.filter((chr)=> chr.gender === gender)
-    }
-
-    const handleGender = useCallback((e)=>{
-        setCharacterSeleted(e.target.value ? filterCharacters(results,e.target.value) : results)
-        setGenderSelected(e.target.value)
-    },[results])
 
     const handlePagination = useCallback( (url)=>{
         setIsLoading(true);
         Api.getPage(url).then((result)=>{
-            setResults({...result, type:PEOPLE_OPTION})
+            setResults({...result, type: optionSelected})
         }).catch((error)=>{
             window.alert(error)
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[results])
+    },[results, optionSelected])
 
-    if(type !== PEOPLE_OPTION){
+    if(type !== optionSelected){
         return notFound()
     }
-
-    useEffect(()=>{
-        setCharacterSeleted(genderSelected? filterCharacters(results,genderSelected) : results)
-    },[results])
 
     return (
         <>
             <section className='mt-10 px-10 lg:px-35 min-w-full flex flex-row justify-between text-white items-end '>
-                <div>
-                    <SelectCustome
-                        placeholder={"Select a gender"} 
-                        variant="flushed"
-                        options={SELECT_GENDER}
-                        onChange={handleGender}
-                    />
-                </div>
+                <div/>
                 <div>
                     <ButtonStyle
                         isDisabled={!previous}
@@ -81,7 +51,7 @@ export default function CharacterList() {
                     <Loading/>
                 :
                     <section className='flex flex-wrap justify-center'>
-                        {characterSeleted.map((chr)=>{
+                        {results.map((chr)=>{
                             return (
                                 <div  key={chr.url}  className='p-4 max-w-sm'>
                                     <CharacterCard 
