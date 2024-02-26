@@ -1,9 +1,10 @@
 'use client'
 import { useCallback, useState } from "react"
 import { InputCustome } from "../InputCustome/InputCustome"
-import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
+import { Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import ButtonStyle from "../ButtonStyle/ButtonStyle"
-import { Api, API_ENDPOINT } from "../../utils/callApi"
+import { Api } from "../../utils/callApi"
+import { API_ENDPOINT } from "../../utils/contanst"
 import { useSwapiStore } from '../../store/useSwapiStore'
 import { Spinner } from '@chakra-ui/react'
 import SelectCustome from "../SelectCustome/SelectCustome"

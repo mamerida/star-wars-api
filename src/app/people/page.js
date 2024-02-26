@@ -1,4 +1,4 @@
-import CharacterList from '../../components/CharacterList/CharacterList'
+import CharacterList from '../../components/Characters/CharacterList/CharacterList'
 import React from 'react'
 
 export default function Characters() {

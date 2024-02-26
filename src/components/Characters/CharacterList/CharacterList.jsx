@@ -3,11 +3,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSwapiStore } from '@/store/useSwapiStore'
 import CharacterCard from '../CharacterCard/CharacterCard'
-import SelectCustome from '../SelectCustome/SelectCustome'
-import ButtonStyle from '../ButtonStyle/ButtonStyle'
+import SelectCustome from '../../SelectCustome/SelectCustome'
+import ButtonStyle from '../../ButtonStyle/ButtonStyle'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { Api } from '@/utils/callApi'
-import Loading from '../Loading/Loading'
+import { Api } from '../../../utils/callApi'
+import { PEOPLE_VALUE } from '../../../utils/contanst'
+import Loading from '../../Loading/Loading'
 import { notFound } from 'next/navigation'
 
 const SELECT_GENDER = [
@@ -16,7 +17,6 @@ const SELECT_GENDER = [
     {value:"unknown",label:"Unknown"},
     {value:"n/a", label: "N/A"}
 ]
-const PEOPLE_OPTION = "people";
 
 export default function CharacterList() {
     const [characterSeleted, setCharacterSeleted] = useState([])
@@ -36,7 +36,7 @@ export default function CharacterList() {
     const handlePagination = useCallback( (url)=>{
         setIsLoading(true);
         Api.getPage(url).then((result)=>{
-            setResults({...result, type:PEOPLE_OPTION})
+            setResults({...result, type:PEOPLE_VALUE })
         }).catch((error)=>{
             window.alert(error)
         }).finally(()=>{
@@ -44,7 +44,7 @@ export default function CharacterList() {
         })
     },[results])
 
-    if(type !== PEOPLE_OPTION){
+    if(type !== PEOPLE_VALUE){
         return notFound()
     }
 
