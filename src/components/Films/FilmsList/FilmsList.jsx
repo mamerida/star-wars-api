@@ -24,7 +24,7 @@ export default function FilmsList() {
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[results, type])
+    },[setResults, type])
 
     if(type !== FILMS_VALUE){
         return notFound()
