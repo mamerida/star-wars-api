@@ -1,16 +1,16 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSwapiStore } from '@/store/useSwapiStore'
 import CharacterCard from '../CharacterCard/CharacterCard'
-import SelectCustome from '../SelectCustome/SelectCustome'
 import ButtonStyle from '../ButtonStyle/ButtonStyle'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Api } from '@/utils/callApi'
 import Loading from '../Loading/Loading'
 import { notFound } from 'next/navigation'
+import PlanetCard from '../PlanetCard/PlanetCard'
 
-export default function List({optionSelected}) {
+export default function PlanetList({optionSelected}) {
     const [isLoading, setIsLoading] = useState(false);
     const {results, type, previous, next, setResults} = useSwapiStore()
 
@@ -54,14 +54,7 @@ export default function List({optionSelected}) {
                         {results.map((chr)=>{
                             return (
                                 <div  key={chr.url}  className='p-4 max-w-sm'>
-                                    <CharacterCard 
-                                        url={chr.url} 
-                                        name={chr.name}
-                                        mass={chr.mass}
-                                        eye_color={chr.eye_color}
-                                        skin_color={chr.skin_color} 
-                                        gender={chr.gender}
-                                    />
+                                    <PlanetCard {...chr}/>
                                 </div>
                             )
                         })}
