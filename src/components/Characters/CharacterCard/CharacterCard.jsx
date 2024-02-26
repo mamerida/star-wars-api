@@ -5,7 +5,7 @@ import Image from 'next/image';
 const getCharactersNumber = (url) => {
     const dataArray = url.split('/');
     const name =  dataArray[dataArray.length - 2];
-    return require(`../../../public/static/assets/img/people/${name}.jpg`)
+    return require(`../../../../public/static/assets/img/people/${name}.jpg`)
 };
 
 export default function CharacterCard({name, gender, mass, eye_color, skin_color, url}) {

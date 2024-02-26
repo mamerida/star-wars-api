@@ -27,6 +27,8 @@ export default function PlanetList() {
     },[results, type])
 
     if(type !== PLANET_VALUE){
+        //if you want test errorBoundary descomment that line
+        // throw new Error()
         return notFound()
     }
 
