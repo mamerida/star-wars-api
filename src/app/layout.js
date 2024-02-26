@@ -16,7 +16,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
           <Header/>
-          {children}
+          <main className="flex min-h-screen flex-col items-center bg-gray-900">
+            <section className="flex flex-col items-center min-w-full ">
+              {children}
+            </section>
+          </main>
         </Providers>
       </body>
     </html>

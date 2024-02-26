@@ -8,17 +8,20 @@ export const useSwapiStore = create(
       count:0,
       prev:null,
       next:null,
-      results:[] ,
+      type:null,
+      results:[],
       setResults: (newState) => set({ 
         results: newState.results, 
         previous: newState.previous,
         next:newState.next,
+        type:newState.type,
         count:newState.count
       }),
       clearStore: () => set({ 
         results:[] , 
         previous: null,
         next: null,
+        type:null,
         count: 0
       }),
     }),

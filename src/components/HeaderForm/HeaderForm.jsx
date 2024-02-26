@@ -3,32 +3,36 @@ import { useCallback, useState } from "react"
 import { InputCustome } from "../InputCustome/InputCustome"
 import { RepeatClockIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import ButtonStyle from "../ButtonStyle/ButtonStyle"
-import { Api } from "../../utils/callApi"
+import { Api, API_ENDPOINT } from "../../utils/callApi"
 import { useSwapiStore } from '../../store/useSwapiStore'
 import { Spinner } from '@chakra-ui/react'
 import SelectCustome from "../SelectCustome/SelectCustome"
+import { useRouter } from 'next/navigation'
 
 
-const API_ENDPOINT = [
-    {label:"Characters",value:"characters"},
-    {label:"Planets",value:"planets"},
-    {label:"Movies",value:"movies"},
-]
 
 export function HeaderForm(){
     const [characterName, setCharacterName] = useState("")
     const [endPointSelected, setEndPointSelected] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const {setResults, clearStore} = useSwapiStore()
+    const router = useRouter()
     const handleNameChange = useCallback((e)=>{
         setCharacterName(e.target.value)
     },[])
 
-    const searchCharacters = useCallback(async()=>{
+    const handleSelectChange = useCallback((e)=>{
+        setEndPointSelected(e.target.value)
+    },[])
+
+    const searchElements = useCallback(()=>{
         setIsLoading(true)
-        Api.getCharacters(characterName)
+        Api.getElement(characterName, endPointSelected)
         .then((res)=>{
-            setResults(res)
+            setResults({...res,type:endPointSelected})
+        })
+        .then(()=>{
+            router.push(`/${endPointSelected}`)
         })
         .catch((error)=>{
             window.alert(error)
@@ -36,7 +40,7 @@ export function HeaderForm(){
         .finally(()=>{
             setIsLoading(false)
         })
-    },[characterName])
+    },[characterName, endPointSelected])
 
     return(       
     <form className=" block flex-grow lg:flex lg:items-center lg:w-auto">
@@ -45,13 +49,22 @@ export function HeaderForm(){
                 <InputCustome 
                     value={characterName} 
                     onChange={handleNameChange} 
-                    placeholder="Character Name"
+                    placeholder={`${endPointSelected || "Element"} name `}
                     leftElement={<Search2Icon />}
                     onKeyDown={(e)=>{if(e.keyCode === 13)e.preventDefault()}}
                     variant="flushed"
                 />
             </div>
             <div className="lg:ms-10 flex flex-row max-[550px]:w-full justify-center md:justify-start">
+                <div className="block text-white mt-4 ms-5 lg:inline-block lg:mt-0">
+                    <SelectCustome
+                        placeholder={"Endpoint"} 
+                        variant="flushed"
+                        value={characterName} 
+                        options={API_ENDPOINT}
+                        onChange={handleSelectChange}
+                    />
+                </div>
                 <div className="block mt-4 ms-5 lg:inline-block lg:mt-0">
                     <ButtonStyle 
                         color="yellow" 
@@ -59,18 +72,7 @@ export function HeaderForm(){
                         label="Search"
                         variant="solid"
                         isDisabled={characterName === "" || isLoading || endPointSelected === ""}
-                        onClick={searchCharacters}  
-                    />
-                </div>
-                <div className=" block mt-4 lg:inline-block lg:mt-0">
-                    <ButtonStyle 
-                        color="blackAlpha" 
-                        rightIcon={<RepeatClockIcon/>}
-                        label="Clear filters"
-                        onClick={()=>{
-                            clearStore();
-                            setCharacterName("");
-                        }}
+                        onClick={searchElements}  
                     />
                 </div>
                 {isLoading && <Spinner color="white" className="mt-4" />}
