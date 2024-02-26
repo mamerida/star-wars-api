@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSwapiStore } from '@/store/useSwapiStore'
 import ButtonStyle from '../../ButtonStyle/ButtonStyle'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
@@ -24,13 +24,15 @@ export default function PlanetList() {
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[results, type])
-
-    if(type !== PLANET_VALUE){
-        //if you want test errorBoundary descomment that line
-        // throw new Error()
-        return notFound()
-    }
+    },[type, setResults])
+    
+    useEffect(()=>{
+        if(type !== PLANET_VALUE){
+            //if you want test errorBoundary descomment that line
+            // throw new Error()
+            return notFound()
+        }
+    },[type])
 
     return (
         <>

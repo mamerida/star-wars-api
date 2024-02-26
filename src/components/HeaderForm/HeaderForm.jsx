@@ -16,7 +16,7 @@ export function HeaderForm(){
     const [characterName, setCharacterName] = useState("")
     const [endPointSelected, setEndPointSelected] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    const {setResults, clearStore} = useSwapiStore()
+    const {setResults} = useSwapiStore()
     const router = useRouter()
     const handleNameChange = useCallback((e)=>{
         setCharacterName(e.target.value)
@@ -41,7 +41,7 @@ export function HeaderForm(){
         .finally(()=>{
             setIsLoading(false)
         })
-    },[characterName, endPointSelected])
+    },[characterName, endPointSelected, router, setResults])
 
     return(       
     <form className=" block flex-grow lg:flex lg:items-center lg:w-auto">

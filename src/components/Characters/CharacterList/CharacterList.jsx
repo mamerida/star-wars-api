@@ -42,15 +42,17 @@ export default function CharacterList() {
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[results])
+    },[setResults])
 
-    if(type !== PEOPLE_VALUE){
-        return notFound()
-    }
+    useEffect(()=>{
+        if(type !== PEOPLE_VALUE){
+            return notFound()
+        }
+    },[type])
 
     useEffect(()=>{
         setCharacterSeleted(genderSelected? filterCharacters(results,genderSelected) : results)
-    },[results])
+    },[results, genderSelected])
 
     return (
         <>
