@@ -2,30 +2,31 @@
 
 import React, { useCallback, useState } from 'react'
 import { useSwapiStore } from '@/store/useSwapiStore'
-import CharacterCard from '../CharacterCard/CharacterCard'
-import ButtonStyle from '../ButtonStyle/ButtonStyle'
+import ButtonStyle from '../../ButtonStyle/ButtonStyle'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { Api } from '@/utils/callApi'
-import Loading from '../Loading/Loading'
+import { Api } from '../../../utils/callApi'
+import { PLANET_VALUE } from '../../../utils/contanst'
+import Loading from '../../Loading/Loading'
 import { notFound } from 'next/navigation'
 import PlanetCard from '../PlanetCard/PlanetCard'
 
-export default function PlanetList({optionSelected}) {
+
+export default function PlanetList() {
     const [isLoading, setIsLoading] = useState(false);
     const {results, type, previous, next, setResults} = useSwapiStore()
 
     const handlePagination = useCallback( (url)=>{
         setIsLoading(true);
         Api.getPage(url).then((result)=>{
-            setResults({...result, type: optionSelected})
+            setResults({...result, type: type})
         }).catch((error)=>{
             window.alert(error)
         }).finally(()=>{
             setIsLoading(false)
         })
-    },[results, optionSelected])
+    },[results, type])
 
-    if(type !== optionSelected){
+    if(type !== PLANET_VALUE){
         return notFound()
     }
 
