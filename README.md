@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h2 align="center" Star Wars Wiki <br/> </h2> 
 
-## Getting Started
+## Sobre el proyecto :clipboard:
 
-First, run the development server:
+Este proyecto consume la API de [https://newsapi.org/](https://swapi.dev/). Con este proyecto vas a poder buscar, filtrar y obtener informacion de los planetas, personajes o peliculas de la saga de starwars
 
-```bash
+
+## Herramientas 🛠️
+<p align="left">
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/js.png" alt=javascript width="50" height="50"/>
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/react.png" alt=javascript width="50" height="50"/>
+<img style="margin: auto;" src="https://skillicons.dev/icons?i=next&perline=3" alt=javascript width="50" height="50"/>
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/npm.png" alt=npm width="50" height="50"/>
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/node.png" alt=nodejs width="50" height="50"/>
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/git.png" alt=git width="50" height="50"/>
+<img style="margin: auto;" src="https://raw.githubusercontent.com/sachinverma53121/sachinverma53121/master/icons/github.png" alt=github width="50" height="50"/>
+<img style="margin: auto;" src="https://skillicons.dev/icons?i=vercel&perline=3" alt=javascript width="50" height="50"/>
+<img style="margin: auto;" src="https://skillicons.dev/icons?i=tailwind&perline=3" alt=javascript width="50" height="50"/>
+
+## Antes de empezar :game_die:
+
+1) Instalar las dependencias del proyecto. 
+```
+npm install
+```
+1) To start. Podes ver la version de desarrollo en [localhost:3000](http://localhost:3000/)
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## <img style="margin: auto;" src="https://skillicons.dev/icons?i=nextjs&perline=3" alt=javascript width="50" height="50"/>  Como buildeo la app?
+```
+npm run build
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## <img style="margin: auto;" src="https://skillicons.dev/icons?i=vercel&perline=3" alt=javascript width="50" height="50"/>  Hay algun deploy? Si!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://star-wars-api-pi.vercel.app/
