@@ -72,7 +72,7 @@ export function HeaderForm(){
                         leftIcon={<SearchIcon/>}
                         label="Search"
                         variant="solid"
-                        isDisabled={characterName === "" || isLoading || endPointSelected === ""}
+                        isDisabled={isLoading || endPointSelected === ""}
                         onClick={searchElements}  
                     />
                 </div>

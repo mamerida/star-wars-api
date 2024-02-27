@@ -16,7 +16,8 @@ const callApi = async (url, method, cache = "default") =>{
 }
 
 const getElement = (name, endpoint) => {
-    const url = BASEURL + endpoint + SEARCH + name
+    let url = BASEURL + endpoint
+    if(name) url += SEARCH + name
     return callApi(url, METHOD_GATE)
 }
 
